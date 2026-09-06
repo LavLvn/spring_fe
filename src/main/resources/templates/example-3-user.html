@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+</head>
+<body>
+
+<p th:text="${message}"></p>    <!-- similara cu System. out.println(), adaugam pe web elementul 'p' un text -->
+
+<p th:if="${isVisible}"> This is visible! </p>  <!-- echivalentul lui if -->
+<p th:unless="${isVisible}"> This is not visible! </p> <!-- echivalentul lui else -->
+
+<ul>
+    <li th:each="it : ${items}" th:text="${it}"></li>
+</ul>
+
+<a th:attr="href=@{/api/v2/welcome/one}">Go to welcome one!</a>
+
+<div th:classappend="${isVisible} ? 'visible true' : 'hidden false'">
+    ham ham
+</div>
+<div th:styleappend="'color:' + ${user.email == 'john@gmail.ro' ? 'green' : 'red'}">
+    meow meow
+</div>
+
+<form method="post" th:action="@{/api/v3/user/submit}" th:object="${user}">
+    <input th:field="*{name}" type="text"/>
+    <input th:field="*{email}" type="text"/>
+    <button type="submit">Submit!</button>
+</form>
+
+</body>
+</html>
